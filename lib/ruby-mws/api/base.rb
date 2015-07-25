@@ -7,7 +7,7 @@ module MWS
     class Base
       include HTTParty
       parser MWS::API::BinaryParser
-      debug_output $stderr if Rails.env.development? # only in development
+      # debug_output $stderr if Rails.env.development? # only in development
       #format :xml
       headers "User-Agent"   => "ruby-mws/#{MWS::VERSION} (Language=Ruby/1.9.3-p0)"
       headers "Content-Type" => "text/xml"
