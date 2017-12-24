@@ -4,13 +4,13 @@ module MWS
     class Response < Hashie::Rash
 
       def self.parse(body, name, params)
-        return body unless body.is_a?(Hash)
+        return body unless body.respond_to?(:to_h)
 
         rash = self.new(body)
         if !rash.keys.nil? && rash.keys.first == "amazon_envelope"
           rash
         else
-          raise BadResponseError, "received non-matching response type #{rash.keys}" if rash["#{name}_response"].nil? 
+          raise BadResponseError, "received non-matching response type #{rash.keys}" if rash["#{name}_response"].nil?
           rash = rash["#{name}_response"]
 
           if rash = rash["#{name}_result"]
